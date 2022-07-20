@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N EO_RFG_anno
+#PBS -l nodes=node1:ppn=5,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o EO_RFG_annotation_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+blastp -db /public3/wudy/246/BlastBase/2000_rice_prot.fa -query EO_prot.fasta -out EO_RFG_e-5 -evalue 1e-5 -outfmt 6 -num_threads 5
+
+###job finished reminder
+echo "Finished at:"
+date

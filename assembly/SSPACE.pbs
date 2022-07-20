@@ -1,0 +1,11 @@
+#PBS -N SSPACE
+#PBS -l nodes=node21:ppn=110
+#PBS -q high
+#PBS -oe
+
+cd $PBS_O_WORKDIR
+SSPACE=/public/software/apps/SSPACE-STANDARD-3.0_linux-x86_64/SSPACE_Standard_v3.0.pl
+genome=6.pilon.fasta
+lib=EC_NGSlist.txt
+outpreix=7.sspace
+perl $SSPACE -l $lib -s $genome -T 110 -b $outprefix

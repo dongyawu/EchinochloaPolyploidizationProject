@@ -1,0 +1,22 @@
+#PBS -N minimap2
+#PBS -l nodes=node1:ppn=20,walltime=30:00:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o log_minimap
+
+echo "Start at:"
+date
+hostname
+
+source activate
+conda activate racon_env
+
+cd $PBS_O_WORKDIR
+
+##job area
+
+minimap2 -ax asm5 -t 20 /public3/wudy/246/EC_typing/EC_v3.fasta /public3/wudy/246/EC_typing/EO.fasta > EO2EC.sam
+
+conda deactivate
+echo "Finished at:"
+date

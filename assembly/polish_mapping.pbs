@@ -1,0 +1,11 @@
+#PBS -N 2K-mapping
+#PBS -l nodes=1:ppn=10,walltime=240:00:00
+#PBS -q high
+cd $PBS_O_WORKDIR
+bowtie2 -p 10 -x /public3/wudy/246/assembly/2_racon/2_racon_polish -1 /public3/wudy/246/Reference/EC_mapping/2K_left.fq_filtered -2 /public3/wudy/246/Reference/EC_mapping/2K_right.fq_filtered --rg-id 2K --rg "PL:ILLUMINA" --rg "SM:2K" -S 2K.sam
+samtools view -@ 20 -bS -o 2K.bam 2K.sam
+samtools sort -@ 20 -o 2K.sorted.bam 2K.bam
+samtools index 2K.sorted.bam
+samtools flagstat 2K.sorted.bam > 2K.fagstat
+rm -f 2K.sam
+rm -f 2K.bam

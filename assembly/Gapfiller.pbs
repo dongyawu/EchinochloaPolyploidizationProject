@@ -1,0 +1,13 @@
+#PBS -N Gapfiller
+#PBS -l nodes=node21:ppn=80,walltime=300:00:00:00
+#PBS -q high
+#PBS -oe
+
+cd $PBS_O_WORKDIR
+
+Gapfiller=/public/software/apps/GapFiller_v1-10_linux-x86_64/GapFiller.pl
+lib=EC_NGSlist.txt
+out=8.gapfiller
+genome=7_SSPACE.fasta
+
+perl $Gapfiller -l $lib -s $genome  -T 80 -b $out

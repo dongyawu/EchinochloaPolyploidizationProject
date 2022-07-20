@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N EO_EH
+#PBS -l nodes=node1:ppn=30,walltime=30:00:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o EO_EH_blastp_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+blastp -db /public3/wudy/246/Reference_V2/EH_prot -query /public3/wudy/246/Reference_V2/EO_prot.fasta -out EO_EH_e-5 -evalue 1e-5 -outfmt 6 -num_threads 30
+
+###job finished reminder
+echo "Finished at:"
+date

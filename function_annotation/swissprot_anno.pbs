@@ -1,0 +1,24 @@
+###define PBS arguments
+#PBS -N EO_sp_anno
+#PBS -l nodes=node2:ppn=5,walltime=24000:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o EO_swissprot_annotation_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+blastp -db /public2/jial/Swiss-prot/uniprot_sprot.fasta -query EO_prot.fasta -out EO_swissprot_e-5 -evalue 1e-5 -outfmt 6 -num_threads 5
+
+#blastp -db /public2/jial/Swiss-prot/uniprot_trembl.fasta -query EO_prot.fasta -out EO_trembl_e-5 -evalue 1e-5 -outfmt 6 -num_threads 35
+
+###job finished reminder
+echo "Finished at:"
+date

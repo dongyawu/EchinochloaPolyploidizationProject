@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N bowtie2_samtools_depth
+#PBS -l nodes=node3:ppn=10,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o bowtie2_K100_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+perl 2_bowtie2_samtools_depth.pl EO.fasta_100.kmer K100
+
+###job finished reminder
+echo "Finished at:"
+date

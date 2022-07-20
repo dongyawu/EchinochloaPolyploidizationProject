@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N EO_interproscan
+#PBS -l nodes=node3:ppn=10,walltime=30:00:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o EO_interproscan_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+sh /public/software/apps/interproscan-5.24-63.0/interproscan.sh -appl Pfam -f TSV -i EO_prot.fasta -cpu 10 -b EO_prot -goterms -iprlookup -pa -dp
+
+###job finished reminder
+echo "Finished at:"
+date

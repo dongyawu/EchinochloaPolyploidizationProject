@@ -1,0 +1,25 @@
+#PBS -N 3.pilon
+#PBS -l nodes=node21:ppn=60,walltime=7200:00:00
+#PBS -q high
+#PBS -oe
+cd $PBS_O_WORKDIR
+
+#cd /public3/wudy/246/assembly/3_polish
+
+genome=/public3/wudy/246/assembly/2_racon/2_racon_polish.fasta
+pe1=180.sorted.bam
+pe2=300.sorted.bam
+pe3=500.sorted.bam
+pe4=500_2.sorted.bam
+mp1=2K.sorted.bam
+mp2=2K2.sorted.bam
+mp3=2K3.sorted.bam
+mp4=2K4.sorted.bam
+mp5=5K.sorted.bam
+mp6=5K2.sorted.bam
+mp7=10K.sorted.bam
+mp8=20K.sorted.bam
+
+pilon=/public/software/apps/pilon-1.23/pilon-1.23.jar
+
+java -Xmx1024g -jar $pilon --genome $genome --frags $pe1 --frags $pe2 --frags $pe3  --frags $pe4 --jumps $mp1 --jumps $mp2 --jumps $mp3 --jumps $mp4 --jumps $mp5 --jumps $mp6 --jumps $mp7 --jumps $mp8 --output 3.pilon --outdir ./ --changes --threads 60
