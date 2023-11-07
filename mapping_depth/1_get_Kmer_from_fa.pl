@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
-die("Usage: perl $0 <fasta file> <Kmer_length>\n") if @ARGV != 2;
+die("Usage: perl $0 <fasta file> <Kmer_length, e.g. 150bp> <Step e.g. 5bp>\n") if @ARGV != 3;
 
 open IN, "<$ARGV[0]";
 open OUT, ">$ARGV[0]_$ARGV[1].kmer";
+my $step=$ARGV[2];
 
 while(<IN>){
 	chomp;
@@ -15,8 +16,10 @@ while(<IN>){
 			$seq = $_;
 			$num = length($seq)-$ARGV[1];
 			foreach $i (0..$num){
-				print OUT ">".$seq_num."_".$i."\n";
-				print OUT substr($seq,$i,$ARGV[1])."\n";
+   				if(${i}%${step}==0){
+					print OUT ">".$seq_num."_".$i."\n";
+					print OUT substr($seq,$i,$ARGV[1])."\n";
+    				}
 			}
 		last;
 		}
