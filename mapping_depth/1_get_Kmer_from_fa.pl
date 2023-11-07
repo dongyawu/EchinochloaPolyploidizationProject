@@ -16,7 +16,7 @@ while(<IN>){
 			$seq = $_;
 			$num = length($seq)-$ARGV[1];
 			foreach $i (0..$num){
-   				if(${i}%${step}==0){
+   				if($i % $step == 0){
 					print OUT ">".$seq_num."_".$i."\n";
 					print OUT substr($seq,$i,$ARGV[1])."\n";
     				}
